@@ -1,0 +1,386 @@
+/*reset*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin        : 0;
+  padding       : 0;
+  border        : 0;
+  font-size     : 100%;
+  font          : inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing : 0;
+}
+
+html {
+  display       : flex;
+  flex-direction: column;
+  min-height    : 100vh;
+}
+
+body {
+  font-size       : 1rem;
+  background-color: #f7f7f7;
+  min-height      : 100vh;
+  display         : flex;
+  flex-direction  : column;
+}
+
+body, select {
+  font-family: "SF Pro TC", "SF Pro Display", "SF Pro Icons", "PingFang TC", "Helvetica Neue", "Helvetica", "Arial", "Microsoft JhengHei", sans-serif;
+}
+
+.main {
+  flex: 1 1 auto;
+}
+
+/*hr*/
+.hr {
+  width      : 900px;
+  border-top : 1px dashed #559AC8;
+  text-align : center;
+  margin     : 67px auto 51px;
+  line-height: 1;
+  position   : relative;
+}
+
+.hr:before {
+  display         : inline-block;
+  content         : "";
+  width           : 22px;
+  height          : 22px;
+  border          : 1.5px solid #559AC8;
+  background-color: #f7f7f7;
+  border-radius   : 50%;
+  margin-top      : -12.5px;
+}
+
+.hr:after {
+  display     : inline-block;
+  content     : "";
+  border-style: solid;
+  border-color: #559AC8 transparent transparent;
+  border-width: 8px 6.5px;
+  position    : absolute;
+  top         : -2px;
+  left        : calc(50% - 6.5px);
+}
+
+/*top區塊*/
+.top {
+  height               : 380px;
+  background-image     : url(../img/the-urban-landscape-1698285.png);
+  background-attachment: fixed;
+  background-size      : cover;
+  text-align           : center;
+  background-repeat    : no-repeat;
+}
+
+.top h1 {
+  color         : #fff;
+  font-size     : 2.5rem;
+  text-indent   : 4px;
+  letter-spacing: 4px;
+  line-height   : 41px;
+  padding       : 89px 0 96px;
+}
+
+.top select {
+  font-size          : 1.125rem;
+  background-color   : rgba(255, 255, 255, .7);
+  border             : 3px solid #fff;
+  border-radius      : 3px;
+  line-height        : 48px;
+  height             : 54px\0;
+  width              : 452px;
+  padding            : 0 6.5px;
+  appearance         : none;
+  -moz-appearance    : none;
+  -webkit-appearance : none;
+  background-image   : url(../img/icons_down.png);
+  background-repeat  : no-repeat;
+  background-position: calc(100% - 14px) center;
+}
+
+.top select::-ms-expand {
+  display: none;
+}
+
+/*IE*/
+/*hotBlock*/
+.hotBlock {
+  margin          : -28px auto 0;
+  padding         : 20px 26px 18px;
+  width           : 800px;
+  background-color: #fff;
+  border-radius   : 5px;
+  box-shadow      : 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+.hotBlock h2 {
+  font-size     : 1.125rem;
+  line-height   : 21px;
+  padding-bottom: 14px;
+}
+
+.hotBlock ul {
+  display: flex;
+  padding: 0 51px;
+}
+
+.hotBlock li {
+  cursor       : pointer;
+  width        : 130px;
+  line-height  : 42px;
+  text-align   : center;
+  border-radius: 5px;
+  font-size    : 1.25rem;
+  color        : #fff;
+  box-shadow   : none;
+  transition   : box-shadow .1s linear;
+}
+
+.hotBlock li:hover {
+  transition: box-shadow .1s linear;
+}
+
+.hotBlock li+li {
+  margin-left: 23px;
+}
+
+.hotBlock li:first-child {
+  background-color: #8A82CC;
+}
+
+.hotBlock li:hover:first-child {
+  box-shadow: 0 0 0 3px rgba(138, 130, 204, .5);
+}
+
+.hotBlock li:nth-child(2) {
+  background-color: #FFA782;
+}
+
+.hotBlock li:hover:nth-child(2) {
+  box-shadow: 0 0 0 3px rgba(255, 167, 130, .5);
+}
+
+.hotBlock li:nth-child(3) {
+  background-color: #F5D005;
+}
+
+.hotBlock li:hover:nth-child(3) {
+  box-shadow: 0 0 0 3px rgba(245, 208, 5, .5);
+}
+
+.hotBlock li:last-child {
+  background-color: #559AC8;
+}
+
+.hotBlock li:hover:last-child {
+  box-shadow: 0 0 0 3px rgba(85, 154, 200, .5);
+}
+
+/*list*/
+.listBlock {
+  width : 960px;
+  margin: 0 auto;
+}
+
+.listName {
+  font-size     : 2.25rem;
+  line-height   : 43px;
+  color         : #8A82CC;
+  text-align    : center;
+  padding-bottom: 24px;
+}
+
+.list {
+  display  : flex;
+  flex-wrap: wrap;
+}
+
+.list>li {
+  width           : calc(50% - 16px);
+  margin          : 0 8px 36px;
+  background-color: #FFFFFF;
+  box-shadow      : 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  position        : relative;
+}
+
+.imgLink {
+  height             : 155px;
+  background-position: center;
+  background-size    : cover;
+  background-repeat  : no-repeat;
+  position           : relative;
+}
+
+.imgLink a {
+  width   : 100%;
+  height  : 100%;
+  display : block;
+  color   : transparent;
+  position: relative;
+  z-index : 1;
+}
+
+.imgLink a:hover:before {
+  display         : block;
+  width           : 100%;
+  height          : 100%;
+  background-color: rgba(0, 0, 0, .7);
+  content         : "";
+  position        : absolute;
+  left            : 0;
+  top             : 0;
+  z-index         : 0;
+}
+
+.imgLink a:hover:after {
+  display    : block;
+  content    : url(../img/icons_out.png);
+  margin     : auto;
+  position   : relative;
+  padding-top: 25px;
+  z-index    : 1;
+  text-align : center;
+}
+
+.imgLink span {
+  position   : absolute;
+  bottom     : 14px;
+  left       : 22px;
+  font-size  : 1.5rem;
+  color      : #fff;
+  z-index    : 0;
+  text-shadow: 0 0 2px rgba(0, 0, 0, .5);
+}
+
+.imgLink :last-child {
+  bottom   : 11px;
+  right    : 24px;
+  left     : auto;
+  font-size: 1rem;
+}
+
+.list ul {
+  padding: 18px 24px 20px 16px;
+}
+
+.list ul li {
+  display    : flex;
+  align-items: center;
+}
+
+.list ul li+li {
+  padding-top: 16px;
+}
+
+.list ul li span {
+  display: inline-flex;
+  width  : calc(100% - 36px);
+}
+
+.list ul li:before {
+  display   : inline-block;
+  width     : 36px;
+  text-align: center;
+}
+
+.list ul li:first-child:before {
+  content: url(../img/icons_clock.png);
+}
+
+.list ul li:nth-child(2):before {
+  content: url(../img/icons_pin.png);
+}
+
+.list ul li:last-child:before {
+  content: url(../img/icons_phone.png);
+}
+
+.ticketInfo {
+  position : absolute;
+  right    : 24px;
+  bottom   : 19px;
+  max-width: 171px;
+}
+
+.ticketInfo:before {
+  display      : inline-block;
+  content      : url(../img/icons_tag.png);
+  padding-right: 8px;
+}
+
+/*pager*/
+.pager {
+  text-align : center;
+  line-height: 24px;
+  padding    : 8px 0 39px;
+}
+
+.pager li {
+  display  : inline-block;
+  font-size: 14px;
+  color    : #4a4a4a;
+}
+
+.pager li+li {
+  margin-left: 30px;
+}
+
+.pager li.disabled a, .pager li.disabled a:hover {
+  cursor: default;
+  color : rgba(73, 73, 73, 0.5);
+}
+
+.pager li.active a {
+  color: #559AC8;
+}
+
+.pager li a {
+  color          : #4a4a4a;
+  text-decoration: none;
+}
+
+.pager li a:hover {
+  color: rgba(85, 154, 200, .85);
+}
+
+/*footer*/
+.footer {
+  font-size       : .938rem;
+  background-color: #559AC8;
+  color           : #fff;
+  text-align      : center;
+  padding         : 24px 0;
+  flex-shrink     : 0;
+}
+
+.footer div {
+  color     : #FFD366;
+  margin-top: 15px;
+}
