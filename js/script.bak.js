@@ -1,4 +1,5 @@
-let xhr = new XMLHttpRequest();
+var xhr = new XMLHttpRequest();
+// xhr.open('get', 'https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97', true);
 xhr.open('get', '../KCtravel.json', true);
 xhr.send(null);
 
@@ -18,8 +19,8 @@ xhr.onload = function () {
   // 下拉的內容
   // 過濾成乾淨的區域陣列到 zoneAry
   const zoneAry = [];
-  for (let i = 0; i < data.length; i++) {
-    zoneAry.push(data[i].Zone);
+  for (let i = 0; i < data.result.records.length; i++) {
+    zoneAry.push(data.result.records[i].Zone);
   }
   // 再用 foreach 去判斷陣列裡面所有值是否有吻合
   const blockData = [];
@@ -38,7 +39,7 @@ xhr.onload = function () {
 
   // 分頁按鈕
   function pagerFun() {
-    const len = data.length;
+    const len = data.result.records.length;
     let pageStr = '';
     const pages = Math.ceil(len / 10);
     const pageNumAry = [];
@@ -75,7 +76,7 @@ xhr.onload = function () {
   // 預設 list 內容
   let listStr = '';
   for (let i = 0; i < 10; i++) {
-    listStr += '<li><div class="imgLink" style="background-image: url(' + data[i].Picture1 + ');">' + '<a href="' + data[i].Website + '">' + data[i].Name + '</a>' + '<span>' + data[i].Name + '</span><span>' + data[i].Zone + '</span></div><ul><li><span>' + data[i].Opentime + '</span></li><li><span>' + data[i].Add + '</span></li><li><span>' + data[i].Tel + '</span></li></ul><div class="ticketInfo">' + data[i].Ticketinfo + '</div>';
+    listStr += '<li><div class="imgLink" style="background-image: url(' + data.result.records[i].Picture1 + ');">' + '<a href="' + data.result.records[i].Website + '">' + data.result.records[i].Name + '</a>' + '<span>' + data.result.records[i].Name + '</span><span>' + data.result.records[i].Zone + '</span></div><ul><li><span>' + data.result.records[i].Opentime + '</span></li><li><span>' + data.result.records[i].Add + '</span></li><li><span>' + data.result.records[i].Tel + '</span></li></ul><div class="ticketInfo">' + data.result.records[i].Ticketinfo + '</div>';
   }
   document.querySelector('.list').innerHTML = listStr;
   // 分頁按鈕及移除空的連結與票卷資訊
@@ -97,16 +98,15 @@ xhr.onload = function () {
     let num;
     let lenControl;
 
-    if (dataNum == nextNum) { // next 顯示的項目
+    if (dataNum == nextNum) {
       const pageActive = parseInt(document.querySelector('.active').dataset.num);
       if (pageActive == pageLastNum) return
       num = pageActive * 10;
       lenControl = (pageActive + 1) * 10;
-      if (pageActive == len -3) {lenControl = data.length;} // 判斷是否為倒數第二頁
       const next = pageActive + 1;
       for (let i = 1; i < len; i++) { pageLi[i].setAttribute('class', '') };
       pageLi[next].setAttribute('class', 'active');
-    } else if (dataNum == 0) { // prev 顯示的項目
+    } else if (dataNum == 0) {
       const pageActive = parseInt(document.querySelector('.active').dataset.num);
       if (pageActive == 1) { return };
       num = (pageActive - 2) * 10;
@@ -117,7 +117,7 @@ xhr.onload = function () {
     } else if (dataNum == pageLastNum) { // 最後一頁顯示的項目
       for (let i = 1; i < len; i++) { pageLi[i].setAttribute('class', '') };
       num = (pageLastNum - 1) * 10;
-      lenControl = data.length;
+      lenControl = data.result.records.length;
       pageLi[pageLastNum].setAttribute('class', 'active');
     } else {
       for (let i = 1; i < len; i++) { pageLi[i].setAttribute('class', '') };
@@ -132,26 +132,22 @@ xhr.onload = function () {
     }
 
     // 控制上下頁的disabled
-    if (lenControl > 10 && lenControl < data.length) {
+    if (lenControl > 10 && lenControl < data.result.records.length) {
       btnPrev.className = 'prev';
       btnNext.className = 'next';
     } else if (lenControl == 10) {
       btnPrev.className = 'prev disabled';
       btnNext.className = 'next';
-    } else if (lenControl == data.length) {
+    } else if (lenControl == data.result.records.length) {
       btnPrev.className = 'prev';
       btnNext.className = 'next disabled';
     }
 
     let listStr = '';
     for (let i = num; i < lenControl; i++) {
-      listStr += '<li><div class="imgLink" style="background-image: url(' + data[i].Picture1 + ');">' + '<a href="' + data[i].Website + '">' + data[i].Name + '</a>' + '<span>' + data[i].Name + '</span><span>' + data[i].Zone + '</span></div><ul><li><span>' + data[i].Opentime + '</span></li><li><span>' + data[i].Add + '</span></li><li><span>' + data[i].Tel + '</span></li></ul><div class="ticketInfo">' + data[i].Ticketinfo + '</div>';
+      listStr += '<li><div class="imgLink" style="background-image: url(' + data.result.records[i].Picture1 + ');">' + '<a href="' + data.result.records[i].Website + '">' + data.result.records[i].Name + '</a>' + '<span>' + data.result.records[i].Name + '</span><span>' + data.result.records[i].Zone + '</span></div><ul><li><span>' + data.result.records[i].Opentime + '</span></li><li><span>' + data.result.records[i].Add + '</span></li><li><span>' + data.result.records[i].Tel + '</span></li></ul><div class="ticketInfo">' + data.result.records[i].Ticketinfo + '</div>';
     }
     document.querySelector('.list').innerHTML = listStr;
-
-    const rect = document.querySelector('.listName').getBoundingClientRect();
-    const elOffset = window.pageYOffset + rect.top;
-    window.scroll(0, elOffset);
 
     nullRemove();
   }
@@ -162,20 +158,20 @@ xhr.onload = function () {
 
     let count = 0;
     let listStr = '';
-    for (let i = 0; i < data.length; i++) {
-      if (el == 0) {    // 點選全部顯示的內容
+    for (let i = 0; i < data.result.records.length; i++) {
+      if (el == 0) {    // 點選請選擇行政區之後顯示的內容
         pagerUl.style.display = 'block';
         listName.textContent = '高雄市景點';
-        listStr += '<li><div class="imgLink" style="background-image: url(' + data[i].Picture1 + ');">' + '<a href="' + data[i].Website + '">' + data[i].Name + '</a>' + '<span>' + data[i].Name + '</span><span>' + data[i].Zone + '</span></div><ul><li><span>' + data[i].Opentime + '</span></li><li><span>' + data[i].Add + '</span></li><li><span>' + data[i].Tel + '</span></li></ul><div class="ticketInfo">' + data[i].Ticketinfo + '</div>';
+        listStr += '<li><div class="imgLink" style="background-image: url(' + data.result.records[i].Picture1 + ');">' + '<a href="' + data.result.records[i].Website + '">' + data.result.records[i].Name + '</a>' + '<span>' + data.result.records[i].Name + '</span><span>' + data.result.records[i].Zone + '</span></div><ul><li><span>' + data.result.records[i].Opentime + '</span></li><li><span>' + data.result.records[i].Add + '</span></li><li><span>' + data.result.records[i].Tel + '</span></li></ul><div class="ticketInfo">' + data.result.records[i].Ticketinfo + '</div>';
         if (count == 9) { break }
         ++count;
       }
-      if (el !== 0 && el === data[i].Zone) {
+      if (el !== 0 && el === data.result.records[i].Zone) {
         // 顯示資料變少，隱藏分頁按鈕
         pagerUl.style.display = 'none';
 
-        listName.textContent = data[i].Zone;
-        listStr += '<li><div class="imgLink" style="background-image: url(' + data[i].Picture1 + ');">' + '<a href="' + data[i].Website + '">' + data[i].Name + '</a>' + '<span>' + data[i].Name + '</span><span>' + data[i].Zone + '</span></div><ul><li><span>' + data[i].Opentime + '</span></li><li><span>' + data[i].Add + '</span></li><li><span>' + data[i].Tel + '</span></li></ul><div class="ticketInfo">' + data[i].Ticketinfo + '</div>';
+        listName.textContent = data.result.records[i].Zone;
+        listStr += '<li><div class="imgLink" style="background-image: url(' + data.result.records[i].Picture1 + ');">' + '<a href="' + data.result.records[i].Website + '">' + data.result.records[i].Name + '</a>' + '<span>' + data.result.records[i].Name + '</span><span>' + data.result.records[i].Zone + '</span></div><ul><li><span>' + data.result.records[i].Opentime + '</span></li><li><span>' + data.result.records[i].Add + '</span></li><li><span>' + data.result.records[i].Tel + '</span></li></ul><div class="ticketInfo">' + data.result.records[i].Ticketinfo + '</div>';
       }
     }
     document.querySelector('.list').innerHTML = listStr;
@@ -193,9 +189,9 @@ xhr.onload = function () {
     // 依選擇的熱門行政區改變下拉
     const el = e.target;
     const elText = e.target.textContent;
-    for (let i = 0; i < blockData.length; i++) {
+    for (var i = 0; i < blockData.length; i++) {
       if (elText == blockData[i]) {
-        const x = i + 2;
+        var x = ++i;
         selBlock.options[x].selected = true;
       }
     }
@@ -203,9 +199,9 @@ xhr.onload = function () {
 
     let listStr = '';
     if (el.nodeName !== 'LI') { return }
-    for (let i = 0; i < data.length; i++) {
-      if (el.textContent == data[i].Zone) {
-        listStr += '<li><div class="imgLink" style="background-image: url(' + data[i].Picture1 + ');">' + '<a href="' + data[i].Website + '">' + data[i].Name + '</a>' + '<span>' + data[i].Name + '</span><span>' + data[i].Zone + '</span></div><ul><li><span>' + data[i].Opentime + '</span></li><li><span>' + data[i].Add + '</span></li><li><span>' + data[i].Tel + '</span></li></ul><div class="ticketInfo">' + data[i].Ticketinfo + '</div>';
+    for (let i = 0; i < data.result.records.length; i++) {
+      if (el.textContent == data.result.records[i].Zone) {
+        listStr += '<li><div class="imgLink" style="background-image: url(' + data.result.records[i].Picture1 + ');">' + '<a href="' + data.result.records[i].Website + '">' + data.result.records[i].Name + '</a>' + '<span>' + data.result.records[i].Name + '</span><span>' + data.result.records[i].Zone + '</span></div><ul><li><span>' + data.result.records[i].Opentime + '</span></li><li><span>' + data.result.records[i].Add + '</span></li><li><span>' + data.result.records[i].Tel + '</span></li></ul><div class="ticketInfo">' + data.result.records[i].Ticketinfo + '</div>';
       }
     }
     document.querySelector('.list').innerHTML = listStr;
@@ -213,3 +209,4 @@ xhr.onload = function () {
     nullRemove();
   }
 }
+

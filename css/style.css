@@ -1,5 +1,85 @@
 /*reset*/
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin        : 0;
   padding       : 0;
   border        : 0;
@@ -9,7 +89,17 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
@@ -17,15 +107,20 @@ body {
   line-height: 1;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
 
-blockquote:before, blockquote:after, q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
   content: '';
   content: none;
 }
@@ -49,7 +144,8 @@ body {
   flex-direction  : column;
 }
 
-body, select {
+body,
+select {
   font-family: "SF Pro TC", "SF Pro Display", "SF Pro Icons", "PingFang TC", "Helvetica Neue", "Helvetica", "Arial", "Microsoft JhengHei", sans-serif;
 }
 
@@ -59,7 +155,7 @@ body, select {
 
 /*hr*/
 .hr {
-  width      : 900px;
+  max-width  : 900px;
   border-top : 1px dashed #559AC8;
   text-align : center;
   margin     : 67px auto 51px;
@@ -115,7 +211,8 @@ body, select {
   border-radius      : 3px;
   line-height        : 48px;
   height             : 54px\0;
-  width              : 452px;
+  width              : 80%;
+  max-width          : 452px;
   padding            : 0 6.5px;
   appearance         : none;
   -moz-appearance    : none;
@@ -134,10 +231,11 @@ body, select {
 .hotBlock {
   margin          : -28px auto 0;
   padding         : 20px 26px 18px;
-  width           : 800px;
+  max-width       : 800px;
   background-color: #fff;
   border-radius   : 5px;
   box-shadow      : 0 1px 3px rgba(0, 0, 0, .2);
+  box-sizing      : border-box;
 }
 
 .hotBlock h2 {
@@ -147,8 +245,9 @@ body, select {
 }
 
 .hotBlock ul {
-  display: flex;
-  padding: 0 51px;
+  display  : flex;
+  flex-wrap: wrap;
+  padding  : 0 51px;
 }
 
 .hotBlock li {
@@ -205,8 +304,8 @@ body, select {
 
 /*list*/
 .listBlock {
-  width : 960px;
-  margin: 0 auto;
+  max-width: 960px;
+  margin   : 0 auto;
 }
 
 .listName {
@@ -276,7 +375,7 @@ body, select {
   font-size  : 1.5rem;
   color      : #fff;
   z-index    : 0;
-  text-shadow: 0 0 2px rgba(0, 0, 0, .5);
+  text-shadow: 0 0 10px rgba(0, 0, 0, .5);
 }
 
 .imgLink :last-child {
@@ -308,6 +407,7 @@ body, select {
   display   : inline-block;
   width     : 36px;
   text-align: center;
+  align-self: flex-start;
 }
 
 .list ul li:first-child:before {
@@ -352,7 +452,8 @@ body, select {
   margin-left: 30px;
 }
 
-.pager li.disabled a, .pager li.disabled a:hover {
+.pager li.disabled a,
+.pager li.disabled a:hover {
   cursor: default;
   color : rgba(73, 73, 73, 0.5);
 }
@@ -383,4 +484,47 @@ body, select {
 .footer div {
   color     : #FFD366;
   margin-top: 15px;
+}
+
+@media (max-width: 1023px) {
+  .hotBlock ul {
+    padding: 0;
+    margin : 0 -10px;
+  }
+
+  .hotBlock li {
+    margin: 0 10px 10px !important;
+  }
+
+  .hr {
+    box-sizing: border-box;
+    width     : calc(100% - 30px);
+  }
+
+  .listBlock,
+  .hotBlock {
+    width: calc(100% - 30px);
+  }
+
+  .imgLink :last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .top h1 {
+    font-size: 2rem;
+  }
+
+  .hotBlock li {
+    width        : auto;
+    padding-left : 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 479px) {
+  .list>li {
+    width: 100%;
+  }
 }
