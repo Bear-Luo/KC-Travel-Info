@@ -1,5 +1,5 @@
 let xhr = new XMLHttpRequest();
-xhr.open('get', 'https://bear-luo.github.io/KC-Travel-Info/KCtravel.json', true);
+xhr.open('get', 'KCtravel.json', true);
 xhr.send(null);
 
 xhr.onload = function () {
